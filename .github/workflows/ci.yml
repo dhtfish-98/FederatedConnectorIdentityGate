@@ -1,0 +1,56 @@
+name: fixed-dex-live-identity-gate
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  live-dex-and-source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Check exact checkout
+        run: test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: go.mod
+          cache: false
+      - name: Verify source version
+        run: |
+          test "$(cat VERSION)" = "0.1.0"
+          grep -F 'const Version = "0.1.0"' gate/version.go
+      - name: Real fixed Dex and two OIDC sources
+        run: bash scripts/validate.sh
+      - name: Check sanitized evidence and tracked source
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          evidence = json.loads(Path('Build/验证/live-evidence.json').read_text())
+          required = ('weak_email_only_collision', 'guarded_distinct_subjects',
+                      'resource_cross_reads_denied', 'persistent_store_reopened',
+                      'old_session_replay_denied_after_rotation',
+                      'same_user_id_different_connector_separated',
+                      'wrong_nonce_denied', 'wrong_audience_denied',
+                      'wrong_trusted_issuer_denied', 'expired_dex_token_denied',
+                      'altered_signature_denied', 'missing_federated_claims_denied',
+                      'unverified_email_denied')
+          assert all(evidence[k] is True for k in required)
+          assert evidence['dex_commit'] == 'c7ced47db7f9dc92192969e6c396e393275278eb'
+          PY
+          git diff --exit-code
+          git diff --cached --exit-code
+          test -z "$(git status --porcelain)"
+      - name: Upload sanitized live evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: fixed-dex-live-evidence
+          path: Build/验证/live-evidence.json
+          if-no-files-found: error
