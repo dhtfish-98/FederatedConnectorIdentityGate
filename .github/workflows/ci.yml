@@ -24,8 +24,8 @@ jobs:
           cache: false
       - name: Verify source version
         run: |
-          test "$(cat VERSION)" = "0.1.0"
-          grep -F 'const Version = "0.1.0"' gate/version.go
+          test "$(cat VERSION)" = "0.1.1"
+          grep -F 'const Version = "0.1.1"' gate/version.go
       - name: Real fixed Dex and two OIDC sources
         run: bash scripts/validate.sh
       - name: Check sanitized evidence and tracked source

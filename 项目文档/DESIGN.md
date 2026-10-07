@@ -1,6 +1,6 @@
 # FederatedConnectorIdentityGate: local experiment and boundary
 
-Status: **local live and extracted source-package acceptance PASS at the pinned Dex commit; public CI OPEN**. No published repository or CVP eligibility claim exists.
+Status: **public v0.1.0 release, its exact-commit main/tag CI, and downloaded release assets independently verified on 2026-10-08 JST**; see [the dated publication record](VALIDATION.md#verified-v010-publication). Version 0.1.1 corrects documentation and release-version metadata; it does not change these controls. CVP eligibility and provider approval remain OPEN.
 
 ## Boundary
 
@@ -25,7 +25,7 @@ The session test is limited to application account isolation and revocation on l
 
 ## Hard acceptance and rights
 
-Acceptance requires real locally run Dex at the exact fixed commit, two live local OIDC sources, Dex-signed tokens, signature/claim verification, local persistent identity/session/resource state, and the weak-versus-guarded comparison. Hand-authored JSON or a fabricated JWT cannot replace that gate. The pinned binary was built under centralized `Build` with an isolated Go 1.27.0 toolchain; its embedded VCS revision is the pinned commit and `vcs.modified=false`. Both the source checkout and an extracted versioned source archive passed the live test, with sanitized local evidence under `Build/验证/FederatedConnectorIdentityGate-20261006`. Independent review, remote CI and publication remain separate gates.
+Acceptance requires real locally run Dex at the exact fixed commit, two live local OIDC sources, Dex-signed tokens, signature/claim verification, local persistent identity/session/resource state, and the weak-versus-guarded comparison. Hand-authored JSON or a fabricated JWT cannot replace that gate. The pinned binary was built under centralized `Build` with an isolated Go 1.27.0 toolchain; its embedded VCS revision is the pinned commit and `vcs.modified=false`. Both the source checkout and an extracted versioned source archive passed the live test, with sanitized local evidence under `Build/验证/FederatedConnectorIdentityGate-20261006`. The subsequent v0.1.0 public CI and publication checks are recorded separately in [validation](VALIDATION.md#verified-v010-publication); the historical local run does not establish later-version runtime behavior or CVP eligibility.
 
 The caller must place the persistent state file beneath a directory it controls and protects from other users. `OpenStore` rejects a non-regular existing file but does not sandbox a caller-selected path, authenticate filesystem ownership, resist hostile parent-directory replacement, or coordinate multiple processes. The in-memory lock protects only one `Store` instance. The lab runs one process; a production application would need process-wide transactional storage, hardened filesystem ownership and recovery policy. Local HTTP endpoints are loopback-only test fixtures, not a production TLS deployment.
 

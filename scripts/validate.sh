@@ -51,7 +51,7 @@ module fcig-consumer
 go 1.27.0
 EOF
 (cd "${consumer}" && go mod edit \
-  -require=github.com/dhtfish-98/FederatedConnectorIdentityGate@v0.1.0 \
+  -require=github.com/dhtfish-98/FederatedConnectorIdentityGate@v0.1.1 \
   "-replace=github.com/dhtfish-98/FederatedConnectorIdentityGate=${source_root}")
 cat > "${consumer}/gate_test.go" <<'EOF'
 package consumer
@@ -65,7 +65,7 @@ import (
 )
 
 func TestExternalImport(t *testing.T) {
-  if gate.Version != "0.1.0" {
+  if gate.Version != "0.1.1" {
     t.Fatalf("installed package version %q", gate.Version)
   }
   if _, err := gate.OpenStore("", time.Minute); !errors.Is(err, gate.ErrDenied) {

@@ -1,0 +1,41 @@
+{
+  "schema": "fcig-publication-evidence.v1",
+  "observed_date_jst": "2026-10-08",
+  "repository": "https://github.com/dhtfish-98/FederatedConnectorIdentityGate",
+  "release_tag": "v0.1.0",
+  "release_published_at_utc": "2026-10-05T21:32:37Z",
+  "commit": "7c589130ec3bc8216f61738a3c6c8b5d23cd28dc",
+  "main_observed_at_same_commit_before_documentation_update": true,
+  "ci": [
+    {
+      "ref": "main",
+      "run_id": 37373188926,
+      "head_sha": "7c589130ec3bc8216f61738a3c6c8b5d23cd28dc",
+      "conclusion": "success"
+    },
+    {
+      "ref": "v0.1.0",
+      "run_id": 37373188944,
+      "head_sha": "7c589130ec3bc8216f61738a3c6c8b5d23cd28dc",
+      "conclusion": "success"
+    }
+  ],
+  "independently_downloaded_assets": [
+    {
+      "name": "FederatedConnectorIdentityGate-v0.1.0.tar.gz",
+      "bytes": 17037,
+      "sha256": "62a95409f59bfd002e698af60dc9384af60c00deebb1660b0b2bb5e1bfcb180d"
+    },
+    {
+      "name": "SHA256SUMS",
+      "bytes": 111,
+      "sha256": "057e30349799b7ac7d2d273986c6d2be365eea07deb39a97b2675ef329fca146"
+    }
+  ],
+  "limits": [
+    "Historical v0.1.0 publication metadata and downloaded byte identity only.",
+    "This check did not execute project code or rerun local validation.",
+    "Later commits and releases require their own verification.",
+    "CVP qualification and approval remain unproven."
+  ]
+}

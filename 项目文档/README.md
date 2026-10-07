@@ -1,6 +1,8 @@
 # FederatedConnectorIdentityGate
 
-Version **0.1.0** · Author **dhtfish98** · Status **local live validation passed; remote publication and CVP eligibility OPEN**.
+Version **0.1.1** · Author **dhtfish98** · Status **public source; v0.1.0 publication independently verified; CVP eligibility OPEN**.
+
+Version 0.1.1 corrects outdated publication wording and updates release-version metadata. The identity, session and resource controls are unchanged. The [publication record](VALIDATION.md#verified-v010-publication) binds the earlier release, main/tag CI and downloaded assets to their exact commit; current-version checks are reported with its release.
 
 This Go library guards a downstream application's local account, session and resource binding after login through Dex. It verifies a Dex-signed ID token and binds the local subject to the trusted Dex issuer plus the signed `federated_claims.connector_id` and `federated_claims.user_id`. The email claim is display data. A deliberately email-keyed baseline exists only inside the live test, where two local identity sources use the same email and demonstrate the ownership collision.
 
